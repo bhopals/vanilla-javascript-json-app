@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   function displayProducts() {
+    var yamlProducts = YAML.load('/js/products.yml');
+    console.log(yamlProducts);
+
     // create document fragment and template for each product
     var fragment = document.createDocumentFragment();
     var product;
@@ -14,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     item.appendChild(text);
 
     // create a document node for each product and add it to the document fragment
-    productData.products.forEach(function(el) {
+    // productData.products.forEach(function(el) {
+    yamlProducts.products.forEach(function(el) {
       product = item.cloneNode(true);
       var currentImage = product.querySelector(".product-image");
       currentImage.src = "images/products/" + el.image;
@@ -28,6 +32,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   function displayPeople() {
+    var yamlPeople = YAML.load('/js/people.yml');
+    console.log(yamlPeople);
+
     var fragment = document.createDocumentFragment();
     var person;
     var section = document.querySelector(".people-cards");
@@ -49,7 +56,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     item.appendChild(cardText);
 
     // create a document node for each product and add it to the document fragment
-    personData.cards.forEach(function(el) {
+    // personData.cards.forEach(function(el) {
+    yamlPeople.cards.forEach(function(el) {
       person = item.cloneNode(true);
       var currentImage = person.querySelector("img");
       currentImage.src = "images/employees/" + el.img.src;
@@ -67,4 +75,38 @@ document.addEventListener("DOMContentLoaded", function(event) {
   displayProducts();
   displayPeople();
 
+  // use tv4 validator to validate product data against product schema
+
+  // log only the first error
+/*
+  var result = tv4.validate(data, schema);
+  if (result === true) {
+    console.log("Valid data");
+  } else {
+    console.log(tv4.error);
+  }
+*/
+
+  // log all errors
+  var productResult = tv4.validateMultiple(productData, productSchema);
+  if (productResult.valid === true) {
+    console.log("Valid product data");
+  } else {
+    console.log(productResult);
+  }
+
+  // use tv4 validator to validate person data against person schema
+  // log all errors 
+  var peopleResult = tv4.validateMultiple(personData, personSchema);
+  if (peopleResult.valid === true) {
+    console.log("Valid people data");
+  } else {
+    console.log(peopleResult);
+  }
+
+  // convert JSON to YAML
+  var productDataToYaml = YAML.stringify(productData);
+  var personDataToYaml = YAML.stringify(personData);
+  console.log(productDataToYaml);
+  console.log(personDataToYaml);
 });
