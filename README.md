@@ -13,6 +13,9 @@
 -   It is used to validate/verify the JSON Response against the object response we are expecting to recieve 
     without processing. The schema simply validate and throw error in any invalidate data is sent. The 
     validation especifically includes required field or type of the value being passed.
+        - Property Name
+        - Property Type
+        - Required
 
 ```
 
@@ -46,8 +49,10 @@ Example Schema :
     };
 ```
 
+Example Sample Data on which Schema would be executed.
+
 ```
-Example Sample Data
+
 
    var productData= {
                 "products": [
@@ -78,6 +83,7 @@ if(productResult === true) {
 } 
 
 //To get the list of all issues in one run we need to use tv4.validateMultiple instead.
+//This returns array list of errors.
 var productResult = tv4.validateMultiple(productData, productSchema);
 if(productResult === true) {
     console.log("Valid Data");
@@ -86,3 +92,7 @@ if(productResult === true) {
 } 
 
 ```
+
+As we discussed about the schema details in above examples, it really seems a tedious task to generate schema. For that, we can use schema generator which provides us the generated schema for sample json.
+
+To do that, go to (jsonschema.net)[http://jsonschema.net/], and enter sample JSON details in JSON section. Once entered, click on **Generate Schema** to generate schema of JSON. Infact, while genenrating schema, it also shows some option that we can select such as MetaData, Description, Required, Objects, Arrays, Ids etc.
