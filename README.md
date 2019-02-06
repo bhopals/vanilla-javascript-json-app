@@ -1,1 +1,1 @@
-"# vanilla-javascript-json-app" 
+## Understand JSON Data
