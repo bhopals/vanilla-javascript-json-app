@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     item.appendChild(cardInfo);
     item.appendChild(cardText);
 
+
     // create a document node for each product and add it to the document fragment
     // personData.cards.forEach(function(el) {
     yamlPeople.cards.forEach(function(el) {
@@ -68,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       fragment.appendChild(person);
     });
 
+    
     // insert the document fragment at the appropriate place in the document
     section.appendChild(fragment);
   }
